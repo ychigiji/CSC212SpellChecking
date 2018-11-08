@@ -39,6 +39,8 @@ Study the ``CharTrie`` implementation and complete the countNodes method on the 
 
 You might want to create a unit test so that you count the nodes of a CharTrie that you can draw by hand. (So you know if you get it correct).
 
+For clarity, ``countNodes`` should return the number of characters stored in the tree. This should be more than the number of words in the vocabulary, but less than the number of characters in the vocabulary (since a Trie shares prefixes).
+
 ### (10) SortedStringListSet.binarySearch
 
 Right now, this data structure merely calls Java's built-in ``Collections.binarySearch``. Replace it with your own implementation.
