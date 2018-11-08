@@ -18,6 +18,7 @@ We create a number of data structures: HashSet, TreeSet, SortedStringListSet, Ch
 
 - How long does it take to fill each data structure? 
 - Plot insertion time per element for each of these data structures.
+- Is there a timing difference between constructing ``HashSet`` and ``TreeSet`` with their input data or calling ``add`` in a for loop? If yes, use the words "balancing" and "resizing" to explain what's going on.
 
 
 ### (20) Plot Query Speed
@@ -27,8 +28,9 @@ I have devised a method ``timeLookup`` that calculates per-item query time for a
 - Construct a dataset that has Strings that are both in and not in the dictionary.
 - For full credit, devise a method to inject some percentage of hits and misses. Create a line plot as the percentage of hits goes from (0.0 to 1.0) in steps of 0.1, where each line is a different data structure.
 
-#### (15) Spell-check a Project Gutenberg book
+### (15) Spell-check a Project Gutenberg book
 - What is the ratio that's "mis-spelled"?
+- Are the query speeds the same over real-world data?
 - What are some of the words that are "mis-spelled"?
 - I gave you ``WordSplitter`` again.
 
@@ -38,9 +40,12 @@ Study the ``CharTrie`` implementation and complete the countNodes method on the 
 
 You might want to create a unit test so that you count the nodes of a CharTrie that you can draw by hand. (So you know if you get it correct).
 
+For clarity, ``countNodes`` should return the number of characters stored in the tree. This should be more than the number of words in the vocabulary, but less than the number of characters in the vocabulary (since a Trie shares prefixes).
+
 ### (10) SortedStringListSet.binarySearch
 
 Right now, this data structure merely calls Java's built-in ``Collections.binarySearch``. Replace it with your own implementation.
 
 For bonus points, find out why [most binary search implementations are incorrect](https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html). Try to fix it in your implementation.
 
+Double-check that your query speeds have not changed with your implementation of binary search. If they have, why might that be?
