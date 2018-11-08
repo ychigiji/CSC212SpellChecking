@@ -64,12 +64,17 @@ public class CheckSpelling {
 		for (String w : listOfWords) {
 			trie.insert(w);
 		}
+		LLHash hm100k = new LLHash(100000);
+		for (String w : listOfWords) {
+			hm100k.add(w);
+		}
 		
 		// --- Make sure that every word in the dictionary is in the dictionary:
 		timeLookup(listOfWords, treeOfWords);
 		timeLookup(listOfWords, hashOfWords);
 		timeLookup(listOfWords, bsl);
 		timeLookup(listOfWords, trie);
+		timeLookup(listOfWords, hm100k);
 		
 		// --- Create a dataset of mixed hits and misses:
 		List<String> hitsAndMisses = new ArrayList<>();
@@ -78,6 +83,8 @@ public class CheckSpelling {
 		timeLookup(hitsAndMisses, hashOfWords);
 		timeLookup(hitsAndMisses, bsl);
 		timeLookup(hitsAndMisses, trie);
+		timeLookup(hitsAndMisses, hm100k);
+
 		
 		// --- linear list timing:
 		// Looking up in a list is so slow, we need to sample:
@@ -89,6 +96,11 @@ public class CheckSpelling {
 	
 		// --- print statistics about the data structures:
 		System.out.println("Count-Nodes: "+trie.countNodes());
+		System.out.println("Count-Collisions[100k]: "+hm100k.countCollisions());
+		System.out.println("Count-Used-Buckets[100k]: "+hm100k.countUsedBuckets());
+		System.out.println("Load-Factor[100k]: "+hm100k.countUsedBuckets() / 100000.0);
+
+		
 		System.out.println("log_2 of listOfWords.size(): "+listOfWords.size());
 		
 		System.out.println("Done!");

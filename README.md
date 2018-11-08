@@ -14,12 +14,11 @@ In your report, have a conclusion section where you recommend one of these data 
 
 ### (15) Measure Creation (Insertion) Speed.
 
-We create a number of data structures: HashSet, TreeSet, SortedStringListSet, CharTrie. Figure out how many nanoseconds per insert are required. This will involve studying my ``System.nanoTime()`` timing code. Since nanoseconds are metric, they are 10^-9 seconds, or 1e-9 in Java notation (hence my division by 1e9 to convert to seconds).
+We create a number of data structures: ``HashSet``, ``TreeSet``, ``SortedStringListSet``, ``CharTrie``, and ``LLHash``. Figure out how many nanoseconds per insert are required. This will involve studying my ``System.nanoTime()`` timing code. Since nanoseconds are metric, they are 10^-9 seconds, or 1e-9 in Java notation (hence my division by 1e9 to convert to seconds).
 
 - How long does it take to fill each data structure? 
 - Plot insertion time per element for each of these data structures.
 - Is there a timing difference between constructing ``HashSet`` and ``TreeSet`` with their input data or calling ``add`` in a for loop? If yes, use the words "balancing" and "resizing" to explain what's going on.
-
 
 ### (20) Plot Query Speed
 
@@ -42,10 +41,17 @@ You might want to create a unit test so that you count the nodes of a CharTrie t
 
 For clarity, ``countNodes`` should return the number of characters stored in the tree. This should be more than the number of words in the vocabulary, but less than the number of characters in the vocabulary (since a Trie shares prefixes).
 
-### (10) SortedStringListSet.binarySearch
+### (5) SortedStringListSet.binarySearch
 
 Right now, this data structure merely calls Java's built-in ``Collections.binarySearch``. Replace it with your own implementation.
 
 For bonus points, find out why [most binary search implementations are incorrect](https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html). Try to fix it in your implementation.
 
 Double-check that your query speeds have not changed with your implementation of binary search. If they have, why might that be?
+
+### (5) LLHash.countCollisions() and LLHash.countUsedBuckets()
+
+LLHash maintains a linked list of Buckets inside of itself. Use this list to compute how many collisions occurred and how many buckets are used. CheckSpelling.main uses them in print statements to compute the load-factor.
+
+Play with the size of LLHash. Does this change your perception of its speed?
+
