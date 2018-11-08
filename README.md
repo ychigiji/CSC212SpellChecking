@@ -4,7 +4,7 @@ In this assignment, we will compare and contrast different data structures for c
 
 ## Rubric (100)
 
-This assignment is out of 100 points. There are two pure coding sections, adding up to (20) points. The rest involves a little more data analysis.
+This assignment is out of 100 points. There are three pure coding sections, adding up to (20) points. The rest involves a little more data analysis. (You will have to code, though). All data analysis can be done in Google Sheets or Excel -- you need not make graphs with Java.
 
 ### (30) Report & Reflection.
 
