@@ -51,7 +51,7 @@ Double-check that your query speeds have not changed with your implementation of
 
 ### (5) LLHash.countCollisions() and LLHash.countUsedBuckets()
 
-LLHash maintains a linked list of Buckets inside of itself. Use this list to compute how many collisions occurred and how many buckets are used. CheckSpelling.main uses them in print statements to compute the load-factor.
+LLHash maintains an ArrayList of Buckets inside of itself. Use this list to compute how many collisions occurred and how many buckets are used. CheckSpelling.main uses them in print statements to compute the load-factor.
 
 Play with the size of LLHash. Does this change your perception of its speed?
 

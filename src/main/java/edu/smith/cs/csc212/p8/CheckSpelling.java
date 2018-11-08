@@ -96,6 +96,8 @@ public class CheckSpelling {
 	
 		// --- print statistics about the data structures:
 		System.out.println("Count-Nodes: "+trie.countNodes());
+		System.out.println("Count-Items: "+hm100k.size());
+
 		System.out.println("Count-Collisions[100k]: "+hm100k.countCollisions());
 		System.out.println("Count-Used-Buckets[100k]: "+hm100k.countUsedBuckets());
 		System.out.println("Load-Factor[100k]: "+hm100k.countUsedBuckets() / 100000.0);

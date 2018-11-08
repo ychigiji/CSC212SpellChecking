@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * This is a simple HashSet that resolves collisions with a LinkedList.
- * All buckets are also in an *intrusive* Singly-Linked-List, for easier iteration.
  * @author jfoley
  *
  */
@@ -17,10 +16,6 @@ public class LLHash extends AbstractSet<String> {
 	 * All the buckets, whether used or not.
 	 */
 	List<Bucket> buckets;
-	/**
-	 * The start of the linked list of used buckets.
-	 */
-	Bucket head;
 	
 	/**
 	 * A LLHash is of a fixed-size.
@@ -31,7 +26,6 @@ public class LLHash extends AbstractSet<String> {
 		for (int i=0; i<numBuckets; i++) {
 			buckets.add(new Bucket());
 		}
-		head = null;
 	}
 	
 
@@ -48,15 +42,7 @@ public class LLHash extends AbstractSet<String> {
 		
 		// Store value, if it is new:
 		if (!bin.values.contains(h)) {
-			bin.values.add(h);
-			
-			// Keep track that we're using this bucket.
-			// SLL.addFront(bin)
-			if (bin.next == null) {
-				bin.next = head;
-				head = bin;
-			}
-			
+			bin.values.add(h);			
 			// we added it.
 			return true;
 		} else {
@@ -85,7 +71,7 @@ public class LLHash extends AbstractSet<String> {
 	@Override
 	public Iterator<String> iterator() {
 		ArrayList<String> items = new ArrayList<>();
-		for (Bucket b = this.head; b!= null; b = b.next) {
+		for (Bucket b : this.buckets) {
 			items.addAll(b.values);
 		}
 		return items.iterator();
@@ -98,7 +84,7 @@ public class LLHash extends AbstractSet<String> {
 	@Override
 	public int size() {
 		int count = 0;
-		for (Bucket b = this.head; b!= null; b = b.next) {
+		for (Bucket b : this.buckets) {
 			count += b.values.size();
 		}
 		return count;
@@ -117,14 +103,14 @@ public class LLHash extends AbstractSet<String> {
 	 * @return the number of buckets with any value.
 	 */
 	public int countUsedBuckets() {
-		return 0;
+		int count = 0;
+		return count;
 	}
 	
 	/**
-	 * This is a bucket! It is a node in a linked list with a value that has a list of the values that collided here.
+	 * This is a bucket! It has a list of the values that collided here.
 	 */
 	private static class Bucket {
-		Bucket next = null;
 		List<String> values = new LinkedList<>();
 	}
 }
