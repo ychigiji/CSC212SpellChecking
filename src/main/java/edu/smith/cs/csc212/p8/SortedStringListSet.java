@@ -8,7 +8,8 @@ import java.util.List;
 
 /**
  * This is an alternate implementation of a dictionary, based on a sorted list.
- * It makes the most sense if the dictionary never changes (compared to a TreeMap).
+ * It often makes the most sense if the dictionary never changes (compared to a TreeMap).
+ * You could write a delete, but it's tricky.
  * @author jfoley
  */
 public class SortedStringListSet extends AbstractSet<String> {
@@ -42,6 +43,13 @@ public class SortedStringListSet extends AbstractSet<String> {
 		return binarySearch((String) key, 0, this.data.size()) >= 0;
 	}
 	
+	/**
+	 * TODO: replace this binarySearch with your own.
+	 * @param query  - the string to look for.
+	 * @param start - the left-hand side of this search (inclusive)
+	 * @param end - the right-hand side of this search (exclusive)
+	 * @return the index found, OR negative if not found.
+	 */
 	private int binarySearch(String query, int start, int end) {
 		// TODO: replace this with your own binary search.
 		return Collections.binarySearch(this.data.subList(start, end), query);

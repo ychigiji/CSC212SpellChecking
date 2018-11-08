@@ -37,15 +37,32 @@ public class CharTrie extends AbstractSet<String> {
 		return root.find(chars);
 	}
 	
+	/**
+	 * Every node in a Trie may have many links (to future letters) AND it may be the "terminal" state of a word.
+	 */
 	private static class Node {
+		/**
+		 * Did a word end at this node?
+		 */
 		boolean terminal;
+		/**
+		 * This is an array of links.
+		 */
 		Node[] links;
 		
+		/**
+		 * Construct a new node (with space for 27 links!).
+		 */
 		public Node() {
 			this.terminal = false;
 			this.links = new Node[27];
 		}
 		
+		/**
+		 * This maps a character to it's index in our array of links.
+		 * @param c (a letter, a-z or a hyphen.)
+		 * @return 0-25 for a-z and - for 26
+		 */
 		public int getLinkIndex(char c) {
 			char lower = Character.toLowerCase(c);
 			if (lower == '-') {
@@ -57,6 +74,10 @@ public class CharTrie extends AbstractSet<String> {
 			return lower - 'a';	
 		}
 		
+		/**
+		 * Insert a word in this trie (or a suffix of a word, because recursion).
+		 * @param chars - a list of characters that used to be a word.
+		 */
 		public void insert(LinkedList<Character> chars) {
 			if (chars.isEmpty()) {
 				this.terminal = true;
@@ -69,6 +90,11 @@ public class CharTrie extends AbstractSet<String> {
 			}
 		}
 		
+		/**
+		 * Find a word in this trie (or a suffix of a word, because recursion).
+		 * @param chars - a list of characters that used to be a word.
+		 * @return true if this trie contains that word.
+		 */
 		public boolean find(LinkedList<Character> chars) {
 			if (chars.isEmpty()) {
 				return this.terminal;
@@ -81,8 +107,15 @@ public class CharTrie extends AbstractSet<String> {
 			}
 		}
 		
+		/**
+		 * Incomplete method to compute how many nodes are in this Trie. Recursive.
+		 * @return the count of nodes that exist in the Trie, starting from here.
+		 */
 		public int countNodes() {
 			int count = 1;
+			// loop over links
+			// if they're not null
+			// count them, too
 			return count;
 		}
 	}
