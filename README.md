@@ -18,6 +18,7 @@ We create a number of data structures: HashSet, TreeSet, SortedStringListSet, Ch
 
 - How long does it take to fill each data structure? 
 - Plot insertion time per element for each of these data structures.
+- Is there a timing difference between constructing ``HashSet`` and ``TreeSet`` with their input data or calling ``add`` in a for loop? If yes, use the words "balancing" and "resizing" to explain what's going on.
 
 
 ### (20) Plot Query Speed
