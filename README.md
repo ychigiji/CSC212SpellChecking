@@ -27,8 +27,9 @@ I have devised a method ``timeLookup`` that calculates per-item query time for a
 - Construct a dataset that has Strings that are both in and not in the dictionary.
 - For full credit, devise a method to inject some percentage of hits and misses. Create a line plot as the percentage of hits goes from (0.0 to 1.0) in steps of 0.1, where each line is a different data structure.
 
-#### (15) Spell-check a Project Gutenberg book
+### (15) Spell-check a Project Gutenberg book
 - What is the ratio that's "mis-spelled"?
+- Are the query speeds the same over real-world data?
 - What are some of the words that are "mis-spelled"?
 - I gave you ``WordSplitter`` again.
 
