@@ -45,3 +45,4 @@ Right now, this data structure merely calls Java's built-in ``Collections.binary
 
 For bonus points, find out why [most binary search implementations are incorrect](https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html). Try to fix it in your implementation.
 
+Double-check that your query speeds have not changed with your implementation of binary search. If they have, why might that be?
