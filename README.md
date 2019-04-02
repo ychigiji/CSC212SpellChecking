@@ -4,11 +4,13 @@ In this assignment, we will compare and contrast different data structures for c
 
 ## Rubric (100)
 
-This assignment is out of 100 points. There are three pure coding sections, adding up to (20) points. The rest involves a little more data analysis. (You will have to code, though). All data analysis can be done in Google Sheets or Excel -- you need not make graphs with Java.
+This assignment is out of 100 points. There are three pure coding sections, adding up to (20) points. The rest involves a little more data analysis. (You will have to code, though). All data analysis can be done in Google Sheets or Excel or R (etc.) -- you need not make graphs with Java.
 
-### (30) Report & Reflection.
+### (20) Report & Reflection.
 
 This assignment is more like a scientific investigation. Prepare a report with answers to these questions, and submit it as a PDF.
+
+### (10) Conclusion: Which Data Structure do you recommend?
 
 In your report, have a conclusion section where you recommend one of these data structures for "Spell-Checking". Justify your selection.
 
@@ -27,7 +29,7 @@ I have devised a method ``timeLookup`` that calculates per-item query time for a
 - Construct a dataset that has Strings that are both in and not in the dictionary.
 - For full credit, devise a method to inject some percentage of hits and misses. Create a line plot as the percentage of hits goes from (0.0 to 1.0) in steps of 0.1, where each line is a different data structure.
 
-### (15) Spell-check a Project Gutenberg book
+### (10) Spell-check a Project Gutenberg book
 - What is the ratio that's "mis-spelled"?
 - Are the query speeds the same over real-world data?
 - What are some of the words that are "mis-spelled"?
@@ -41,7 +43,7 @@ You might want to create a unit test so that you count the nodes of a CharTrie t
 
 For clarity, ``countNodes`` should return the number of characters stored in the tree. This should be more than the number of words in the vocabulary, but less than the number of characters in the vocabulary (since a Trie shares prefixes).
 
-### (5) SortedStringListSet.binarySearch
+### (10) SortedStringListSet.binarySearch
 
 Right now, this data structure merely calls Java's built-in ``Collections.binarySearch``. Replace it with your own implementation.
 
