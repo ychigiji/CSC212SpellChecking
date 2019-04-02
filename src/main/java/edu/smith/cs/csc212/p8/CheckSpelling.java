@@ -19,6 +19,7 @@ public class CheckSpelling {
 		long start = System.nanoTime();
 		List<String> words;
 		try {
+			// Read from a file:
 			words = Files.readAllLines(new File("src/main/resources/words").toPath());
 		} catch (IOException e) {
 			throw new RuntimeException("Couldn't find dictionary.", e);
@@ -51,6 +52,13 @@ public class CheckSpelling {
 		System.out.println(dictionary.getClass().getSimpleName()+": Lookup of items found="+fractionFound+" time="+nsPerItem+" ns/item");
 	}
 	
+	public static List<String> createMixedDataset(List<String> yesWords, int numSamples, double fractionYes) {
+		// Hint to the ArrayList that it will need to grow to numSamples size:
+		List<String> output = new ArrayList<>(numSamples);
+		// TODO: select numSamples * fractionYes words from yesWords; create the rest as no words.
+		return output;
+	}
+	
 	
 	public static void main(String[] args) {
 		// --- Load the dictionary.
@@ -76,14 +84,19 @@ public class CheckSpelling {
 		timeLookup(listOfWords, trie);
 		timeLookup(listOfWords, hm100k);
 		
-		// --- Create a dataset of mixed hits and misses:
-		List<String> hitsAndMisses = new ArrayList<>();
-		// TODO, do this.
-		timeLookup(hitsAndMisses, treeOfWords);
-		timeLookup(hitsAndMisses, hashOfWords);
-		timeLookup(hitsAndMisses, bsl);
-		timeLookup(hitsAndMisses, trie);
-		timeLookup(hitsAndMisses, hm100k);
+		
+		for (int i=0; i<10; i++) {
+			// --- Create a dataset of mixed hits and misses with p=i/10.0
+			List<String> hitsAndMisses = createMixedDataset(listOfWords, 10_000, i/10.0);
+			
+			// --- Time the data structures.
+			timeLookup(hitsAndMisses, treeOfWords);
+			timeLookup(hitsAndMisses, hashOfWords);
+			timeLookup(hitsAndMisses, bsl);
+			timeLookup(hitsAndMisses, trie);
+			timeLookup(hitsAndMisses, hm100k);
+		}
+			
 
 		
 		// --- linear list timing:
