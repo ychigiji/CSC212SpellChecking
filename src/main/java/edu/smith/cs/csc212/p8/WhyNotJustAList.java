@@ -31,6 +31,13 @@ public class WhyNotJustAList {
 				double frac = i / N;
 				int percent = (int) (frac * 100);
 				System.out.println("Progress: "+percent+"%");
+				long endLookup = System.nanoTime();
+				
+				// print information:
+				double fractionFound = found / N;
+				double timeSpentPerItem = (endLookup - startLookup) / N;
+				int nsPerItem = (int) timeSpentPerItem;
+				System.out.println("Linear Lookup of items found="+fractionFound+" time="+nsPerItem+" ns/item");
 			}
 			String w = listOfWords.get(i);
 			if (listOfWords.contains(w)) {
