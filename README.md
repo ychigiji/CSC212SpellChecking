@@ -16,6 +16,8 @@ In your report, have a conclusion section where you recommend one of these data 
 
 ### (15) Measure Creation (Insertion) Speed.
 
+Consider the code in ``CheckSpelling`` first.
+
 We create a number of data structures: ``HashSet``, ``TreeSet``, ``SortedStringListSet``, ``CharTrie``, and ``LLHash``. Figure out how many nanoseconds per insert are required. This will involve studying my ``System.nanoTime()`` timing code. Since nanoseconds are metric, they are 10^-9 seconds, or 1e-9 in Java notation (hence my division by 1e9 to convert to seconds).
 
 - How long does it take to fill each data structure? 
@@ -24,16 +26,25 @@ We create a number of data structures: ``HashSet``, ``TreeSet``, ``SortedStringL
 
 ### (20) Plot Query Speed
 
+Now consider the code in ``FakeDatasetExperiment``.
+
 I have devised a method ``timeLookup`` that calculates per-item query time for all the words in a structure. It also prints out the "fraction found" of the dataset. 
 
 - Construct a dataset that has Strings that are both in and not in the dictionary.
 - For full credit, devise a method to inject some percentage of hits and misses. Create a line plot as the percentage of hits goes from (0.0 to 1.0) in steps of 0.1, where each line is a different data structure.
 
 ### (10) Spell-check a Project Gutenberg book
+
+Now consider the code in ``BookExperiment``. 
+
 - What is the ratio that's "mis-spelled"?
 - Are the query speeds the same over real-world data?
 - What are some of the words that are "mis-spelled"?
 - I gave you ``WordSplitter`` again.
+
+## Now implement some code!
+
+This is the more traditional "data-structures" portion of the assignment.
 
 ### (10) CharTrie.countNodes()
 
