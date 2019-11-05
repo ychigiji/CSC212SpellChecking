@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * This class contains experimentation code.
+ * @author jfoley
+ *
+ */
 public class CheckSpelling {
 	/**
 	 * Read all lines from the UNIX dictionary.
@@ -52,6 +57,23 @@ public class CheckSpelling {
 		System.out.println(dictionary.getClass().getSimpleName()+": Lookup of items found="+fractionFound+" time="+nsPerItem+" ns/item");
 	}
 	
+	
+	/**
+	 * Maybe this will be a nice helper method. How do you "ruin" a correctly spelled word?
+	 * @param realWord - a word from the dictionary, perhaps chosen at random.
+	 * @return an incorrectly-spelled word. Maybe you deleted a letter or added one?
+	 */
+	public static String makeFakeWord(String realWord) {
+		throw new RuntimeException("TODO");
+	}
+	
+	/**
+	 * Create a list of words that contains some dictionary words in proportion to some non-dictionary words.
+	 * @param yesWords - the words in the dictionary.
+	 * @param numSamples - the number of total words to select.
+	 * @param fractionYes - the fraction of words that are in the dictionary -- with 0.5, half would be spelled correctly and half would be incorrect.
+	 * @return a new list where size is numSamples.
+	 */
 	public static List<String> createMixedDataset(List<String> yesWords, int numSamples, double fractionYes) {
 		// Hint to the ArrayList that it will need to grow to numSamples size:
 		List<String> output = new ArrayList<>(numSamples);
@@ -59,7 +81,10 @@ public class CheckSpelling {
 		return output;
 	}
 	
-	
+	/**
+	 * This is the entry point of this assignment.
+	 * @param args - unused command-line arguments.
+	 */
 	public static void main(String[] args) {
 		// --- Load the dictionary.
 		List<String> listOfWords = loadDictionary();
@@ -78,6 +103,7 @@ public class CheckSpelling {
 		}
 		
 		// --- Make sure that every word in the dictionary is in the dictionary:
+		//     This feels rather silly, but we're outputting timing information!
 		timeLookup(listOfWords, treeOfWords);
 		timeLookup(listOfWords, hashOfWords);
 		timeLookup(listOfWords, bsl);
@@ -85,6 +111,8 @@ public class CheckSpelling {
 		timeLookup(listOfWords, hm100k);
 		
 		
+		// --- OK, so that was a biased experiment (the answer to every question was yes!).
+		//     Let's try 10% yesses.
 		for (int i=0; i<10; i++) {
 			// --- Create a dataset of mixed hits and misses with p=i/10.0
 			List<String> hitsAndMisses = createMixedDataset(listOfWords, 10_000, i/10.0);
@@ -96,16 +124,6 @@ public class CheckSpelling {
 			timeLookup(hitsAndMisses, trie);
 			timeLookup(hitsAndMisses, hm100k);
 		}
-			
-
-		
-		// --- linear list timing:
-		// Looking up in a list is so slow, we need to sample:
-		System.out.println("Start of list: ");
-		timeLookup(listOfWords.subList(0, 1000), listOfWords);
-		System.out.println("End of list: ");
-		timeLookup(listOfWords.subList(listOfWords.size()-100, listOfWords.size()), listOfWords);
-		
 	
 		// --- print statistics about the data structures:
 		System.out.println("Count-Nodes: "+trie.countNodes());
