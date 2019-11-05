@@ -1,4 +1,4 @@
-package edu.smith.cs.csc212.p8;
+package edu.smith.cs.csc212.speller;
 
 import java.util.Collection;
 import java.util.HashSet;
