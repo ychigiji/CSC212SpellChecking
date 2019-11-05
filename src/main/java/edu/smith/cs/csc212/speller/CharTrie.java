@@ -58,7 +58,7 @@ public class CharTrie extends AbstractSet<String> {
 		/**
 		 * Did a word end at this node?
 		 */
-		boolean terminal;
+		boolean isEndOfWord;
 		/**
 		 * This is an array of links.
 		 */
@@ -68,7 +68,7 @@ public class CharTrie extends AbstractSet<String> {
 		 * Construct a new node (with space for 27 links!).
 		 */
 		public Node() {
-			this.terminal = false;
+			this.isEndOfWord = false;
 			this.links = new ArrayList<>(NUM_LINKS);
 			for (int i = 0; i < NUM_LINKS; i++) {
 				links.add(null);
@@ -82,14 +82,16 @@ public class CharTrie extends AbstractSet<String> {
 		 * @return 0-25 for a-z and - for 26
 		 */
 		public int getLinkIndex(char c) {
-			char lower = Character.toLowerCase(c);
-			if (lower == '-') {
-				return this.links.size() - 1;
-			}
-			if (lower > 'z' || lower < 'a') {
+			if (c == '-') {
+				return NUM_LINKS - 1;
+			} else if (c >= 'A' && c <= 'Z') {
+				return c - 'A';
+			} else if (c>= 'a' && c <= 'z') {
+				return c - 'a';
+			} else {
+				// not a valid character
 				return -1;
 			}
-			return lower - 'a';
 		}
 
 		/**
@@ -99,7 +101,7 @@ public class CharTrie extends AbstractSet<String> {
 		 */
 		public void insert(LinkedList<Character> chars) {
 			if (chars.isEmpty()) {
-				this.terminal = true;
+				this.isEndOfWord = true;
 			} else {
 				char c = chars.pollFirst();
 				int link = getLinkIndex(c);
@@ -121,7 +123,7 @@ public class CharTrie extends AbstractSet<String> {
 		 */
 		public boolean find(LinkedList<Character> chars) {
 			if (chars.isEmpty()) {
-				return this.terminal;
+				return this.isEndOfWord;
 			} else {
 				int link = getLinkIndex(chars.pollFirst());
 				if (link == -1) {
