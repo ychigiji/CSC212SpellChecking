@@ -1,8 +1,10 @@
 package edu.smith.cs.csc212.p8;
 
 import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This is a Character Trie that stores Strings!
@@ -51,6 +53,8 @@ public class CharTrie extends AbstractSet<String> {
 	 * the "terminal" state of a word.
 	 */
 	private static class Node {
+		/** a..z and dash/hyphen/- */
+		private static int NUM_LINKS = 26 + 1;
 		/**
 		 * Did a word end at this node?
 		 */
@@ -58,14 +62,17 @@ public class CharTrie extends AbstractSet<String> {
 		/**
 		 * This is an array of links.
 		 */
-		Node[] links;
+		List<Node> links;
 
 		/**
 		 * Construct a new node (with space for 27 links!).
 		 */
 		public Node() {
 			this.terminal = false;
-			this.links = new Node[27];
+			this.links = new ArrayList<>(NUM_LINKS);
+			for (int i = 0; i < NUM_LINKS; i++) {
+				links.add(null);
+			}
 		}
 
 		/**
@@ -77,7 +84,7 @@ public class CharTrie extends AbstractSet<String> {
 		public int getLinkIndex(char c) {
 			char lower = Character.toLowerCase(c);
 			if (lower == '-') {
-				return this.links.length - 1;
+				return this.links.size() - 1;
 			}
 			if (lower > 'z' || lower < 'a') {
 				return -1;
@@ -99,10 +106,10 @@ public class CharTrie extends AbstractSet<String> {
 				if (link == -1) {
 					throw new RuntimeException("Bad Character: " + c);
 				}
-				if (links[link] == null) {
-					links[link] = new Node();
+				if (links.get(link) == null) {
+					links.set(link, new Node());
 				}
-				links[link].insert(chars);
+				links.get(link).insert(chars);
 			}
 		}
 
@@ -120,10 +127,12 @@ public class CharTrie extends AbstractSet<String> {
 				if (link == -1) {
 					return false;
 				}
-				if (links[link] == null) {
+				// no more children!
+				if (links.get(link) == null) {
 					return false;
 				}
-				return links[link].find(chars);
+				// recurse!
+				return links.get(link).find(chars);
 			}
 		}
 
@@ -152,7 +161,8 @@ public class CharTrie extends AbstractSet<String> {
 
 	/**
 	 * We would need to create an object that kept the recursion state around. We
-	 * will talk about depth-first search (part of the solution to this) later in the course.
+	 * will talk about depth-first search (part of the solution to this) later in
+	 * the course.
 	 */
 	@Override
 	public Iterator<String> iterator() {
