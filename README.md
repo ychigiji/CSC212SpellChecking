@@ -1,4 +1,4 @@
-# CSC212P8
+# CSC212: Spell Checking
 
 In this assignment, we will compare and contrast different data structures for creating a SpellChecker.
 
