@@ -60,17 +60,53 @@ public class CheckSpelling {
 		List<String> listOfWords = loadDictionary();
 		
 		// --- Create a bunch of data structures for testing:
-		TreeSet<String> treeOfWords = new TreeSet<>(listOfWords);
-		HashSet<String> hashOfWords = new HashSet<>(listOfWords);
+		long startTreeSet =   System.nanoTime();
+		TreeSet<String> treeOfWords = new TreeSet<>();
+		for (String w: listOfWords) {
+			treeOfWords.add(w);
+		}
+		long endTreeSet = System.nanoTime();
+		double timeTreeSet = (endTreeSet - startTreeSet) / 1e9;
+		System.out.println("TreeSet Time " + listOfWords.size() + " entries in " + timeTreeSet +" seconds.");
+		
+		long startHashSet =   System.nanoTime();
+		
+		HashSet<String> hashOfWords = new HashSet<>();
+		for (String w: listOfWords) {
+			hashOfWords.add(w);
+		}
+		long endHashSet = System.nanoTime();
+		double timeHashSet = (endHashSet - startHashSet) / 1e9;
+		System.out.println("HashSet Time " + hashOfWords.size() + " entries in " + timeHashSet +" seconds.");
+		
+		
+		
+		long startSortedStringListSet =   System.nanoTime();
 		SortedStringListSet bsl = new SortedStringListSet(listOfWords);
+		long endSortedStringListSet = System.nanoTime();
+		double timeSortedStringListSet = (endSortedStringListSet - startSortedStringListSet) / 1e9;
+		System.out.println("SortedStringListSet Time " + listOfWords.size() + " entries in " + timeSortedStringListSet +" seconds.");
+		
+		
+		
 		CharTrie trie = new CharTrie();
+		long startCharTrie =   System.nanoTime();
 		for (String w : listOfWords) {
 			trie.insert(w);
 		}
+		long endCharTrie = System.nanoTime();
+		double timeCharTrie = (endCharTrie - startCharTrie) / 1e9;
+		System.out.println("CharTrie Time " + listOfWords.size() + " entries in " + timeCharTrie +" seconds.");
+		
+		
 		LLHash hm100k = new LLHash(100000);
+		long startLLHash =   System.nanoTime();
 		for (String w : listOfWords) {
 			hm100k.add(w);
 		}
+		long endLLHash = System.nanoTime();
+		double timeLLHash = (endLLHash - startLLHash) / 1e9;
+		System.out.println("LLHashSet Time " + listOfWords.size() + " entries in " + timeLLHash +" seconds.");
 		
 		// --- Make sure that every word in the dictionary is in the dictionary:
 		//     This feels rather silly, but we're outputting timing information!

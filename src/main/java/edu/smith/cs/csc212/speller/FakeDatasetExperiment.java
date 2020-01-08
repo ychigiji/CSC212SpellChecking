@@ -3,6 +3,7 @@ package edu.smith.cs.csc212.speller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -25,7 +26,7 @@ public class FakeDatasetExperiment {
 
 	/**
 	 * Create a list of words that contains some dictionary words in proportion to
-	 * some non-dictionary words.
+	 * some non-dictionary words. 
 	 * 
 	 * @param yesWords    - the words in the dictionary.
 	 * @param numSamples  - the number of total words to select.
@@ -37,9 +38,36 @@ public class FakeDatasetExperiment {
 	public static List<String> createMixedDataset(List<String> yesWords, int numSamples, double fractionYes) {
 		// Hint to the ArrayList that it will need to grow to numSamples size:
 		List<String> output = new ArrayList<>(numSamples);
-		// TODO: select numSamples * fractionYes words from yesWords; create the rest as
+		
+		
+		Random rand = new Random();
+		
+		//  select numSamples * fractionYes words from yesWords; create the rest as
+		for (int i = 0; i< fractionYes *numSamples; i++) {
+			int index = rand.nextInt(yesWords.size());
+				output.add(yesWords.get(index));
+		}
+		//create the rest of the words
+		for (int i =0; i < (1- fractionYes)*numSamples; i++) {
+			String noWords = generateNoWords();
+			output.add(noWords);
+		}
+		System.out.println("output is" + output.get(0) + " & " + output.get(output.size()-1));
 		// no words.
 		return output;
+	}
+	
+	public static String generateNoWords() {
+		Random rand = new Random();
+		int length = rand.nextInt(10);
+		length = length + 1;
+		String s = "";
+		for (int i =0;i < length; i++) {
+			int charRand = rand.nextInt(123 - 97);
+			charRand = charRand + 97;
+			s =s +(char)charRand;
+		}
+		return s;
 	}
 
 	/**

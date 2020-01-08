@@ -146,8 +146,14 @@ public class CharTrie extends AbstractSet<String> {
 		public int countNodes() {
 			int count = 1;
 			// loop over links
-			// if they're not null
-			// count them, too
+						// if they're not null
+						// count them, too
+			for(Node n: links ) {
+				if (n != null) {
+					count +=n.countNodes();
+				}
+			}
+			
 			return count;
 		}
 	}
@@ -158,6 +164,7 @@ public class CharTrie extends AbstractSet<String> {
 	 * @return the number of nodes in the trie.
 	 */
 	public int countNodes() {
+	System.out.println(root.countNodes());
 		return root.countNodes();
 	}
 
@@ -178,6 +185,21 @@ public class CharTrie extends AbstractSet<String> {
 	@Override
 	public int size() {
 		return size;
+	}
+	
+	public static void main(String[] args) {
+		
+		CharTrie trie = new CharTrie();
+		
+		trie.insert("yolie");
+		trie.insert("yes");
+		trie.insert("nyasha");
+		
+		System.out.println("The number of nodes is " + trie.countNodes());
+		
+		
+	
+		
 	}
 
 }
